@@ -2,14 +2,14 @@ version: '3'
 services:
   app:
     container_name: docker-node-mongo
-    restart: always
-    build: .
+    restart: always # We want to restart iamge always if it failed
+    build: . # Builds from the dockerfile from the current directory
     ports:
       - '80:3000'
-    external_links:
+    links: # We are going to link our app service to our mongo service
       - mongo
   mongo:
     container_name: mongo
-    image: mongo
+    image: mongo # we are not going to build the service from a Dockerfile but rather from an image on dockerhub
     ports:
       - '27017:27017'
